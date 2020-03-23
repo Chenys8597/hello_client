@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration packages="com.zr.commons">
+    <Appenders>
+        <LogService name="LogService">
+        	<PatternLayout pattern="[%p] %d %c - %m%n" />
+        </LogService>
+        
+        <LogOptService name="LogOptService">
+        	<PatternLayout pattern="[%p] %d %c - %m%n" />
+        </LogOptService>
+    </Appenders>
+    <Loggers>
+        <Root level="ERROR">
+            <AppenderRef ref="LogService" />
+        </Root>
+        
+        <Logger name="STAFF" level="INFO" additivity="false">
+			 <AppenderRef ref="LogOptService" />
+		</Logger>
+    </Loggers>
+</Configuration>

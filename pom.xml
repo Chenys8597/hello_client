@@ -1,0 +1,236 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <groupId>com.zr.detection</groupId>
+  <artifactId>com_zr_supervision</artifactId>
+  <version>1.0.0_${build.formattimestamp}</version>
+  <packaging>jar</packaging>
+
+  <name>com_zr_supervision</name>
+  <url>http://maven.apache.org</url>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>1.5.12.RELEASE</version>
+  </parent>
+  
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.version>1.8</java.version>
+  </properties>
+
+  <dependencies>
+
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-undertow</artifactId>
+        <exclusions>
+            <exclusion>
+                <groupId>io.undertow</groupId>
+                <artifactId>undertow-websockets-jsr</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+    
+    <dependency>
+        <groupId>org.jboss.resteasy</groupId>
+        <artifactId>resteasy-validator-provider-11</artifactId>
+        <version>3.1.4.Final</version>
+    </dependency>
+    
+    <!-- 
+    <dependency>
+        <groupId>org.jboss.resteasy</groupId>
+        <artifactId>resteasy-client</artifactId>
+        <version>3.1.4.Final</version>
+    </dependency>
+     -->
+    <dependency>
+        <groupId>org.jboss.resteasy</groupId>
+        <artifactId>resteasy-multipart-provider</artifactId>
+        <version>3.1.4.Final</version>
+    </dependency>
+    
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter</artifactId>
+        <exclusions>
+            <exclusion>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-logging</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+    
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+    </dependency>
+    
+    <dependency>
+        <groupId>com.zaxxer</groupId>
+        <artifactId>HikariCP</artifactId>
+    </dependency>
+    <!-- 
+    <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+    </dependency> -->
+    <dependency>
+      <groupId>cn.easyproject</groupId>
+      <artifactId>ojdbc6</artifactId>
+      <version>11.2.0.4</version>
+    </dependency>
+    
+    <dependency>
+       <groupId>com.esotericsoftware</groupId>
+       <artifactId>kryo</artifactId>
+       <version>5.0.0-RC1</version>
+    </dependency>
+    
+    <dependency>
+        <groupId>com.jayway.restassured</groupId>
+        <artifactId>rest-assured</artifactId>
+        <version>2.9.0</version>
+        <scope>test</scope>
+    </dependency>
+    
+    <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-validator</artifactId>
+    </dependency>
+    
+    <dependency>
+        <groupId>com.zr.detection</groupId>
+        <artifactId>com_zr_commons</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+    
+    <dependency>
+        <groupId>com.zr.detection</groupId>
+        <artifactId>com_timer_commons</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+    
+    <dependency>
+       <groupId>ma.glasnost.orika</groupId>
+       <artifactId>orika-core</artifactId>
+       <version>1.5.4</version>
+    </dependency>
+    
+    <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>fastjson</artifactId>
+        <version>1.2.32</version>
+    </dependency>
+    
+    <!-- linux链接ftp所依赖的jar包 -->
+    <dependency>
+        <groupId>commons-net</groupId>
+        <artifactId>commons-net</artifactId>
+        <version>3.6</version>
+    </dependency>
+    
+    
+    
+  </dependencies>
+  
+  <build>
+    <plugins>
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <configuration>
+                <mainClass>com.zr.supervision.Application</mainClass>
+            </configuration>
+        </plugin>
+    
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>build-helper-maven-plugin</artifactId>
+            <executions>
+                <execution>
+                    <id>add-source</id>
+                    <phase>generate-sources</phase>
+                    <goals>
+                        <goal>add-source</goal>
+                    </goals>
+                    <configuration>
+                        <sources>
+                            <source>src/main/ice</source>
+                        </sources>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>buildnumber-maven-plugin</artifactId>
+            <executions>
+                <execution>
+                    <phase>validate</phase>
+                    <goals>
+                        <goal>create-timestamp</goal>
+                    </goals>
+                </execution>
+            </executions>
+            <configuration>
+                <timestampFormat>yyMMddHHmm</timestampFormat>
+                <timestampPropertyName>build.formattimestamp</timestampPropertyName>
+            </configuration>
+        </plugin>
+    </plugins>
+    
+    
+    <!-- <resources>
+        <resource>
+            <directory>src/main/resources/lib</directory>
+            <targetPath>BOOT-INF/lib</targetPath>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </resource>
+        <resource>
+            <directory>src/main/resources</directory>
+            <targetPath>BOOT-INF/classes</targetPath>
+            <includes>
+                <include>*.properties</include>
+                <include>*.jks</include>
+            </includes>
+        </resource>
+    </resources> -->
+    
+     
+    <pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.eclipse.m2e</groupId>
+                <artifactId>lifecycle-mapping</artifactId>
+                <version>1.0.0</version>
+                <configuration>
+                    <lifecycleMappingMetadata>
+                        <pluginExecutions>
+                            <pluginExecution>
+                                <pluginExecutionFilter>
+                                    <groupId>org.codehaus.mojo</groupId>
+                                    <artifactId>buildnumber-maven-plugin</artifactId>
+                                    <versionRange>1.4</versionRange>
+                                    <goals>
+                                        <goal>create-timestamp</goal>
+                                    </goals>
+                                </pluginExecutionFilter>
+                                <action>
+                                    <ignore/>
+                                </action>
+                            </pluginExecution>
+                        </pluginExecutions>
+                    </lifecycleMappingMetadata>
+                </configuration>
+            </plugin>
+        </plugins>
+    </pluginManagement>
+  </build>
+</project>

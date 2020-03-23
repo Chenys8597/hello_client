@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn">
+    <Appenders>
+    	
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%p] %d %c - %m%n" />
+        </Console>
+        
+        <!-- 
+        <RollingFile name="RollingFile" fileName="/data0/project_apps/logs/idc/idcenter.log" filePattern="/data0/project_apps/logs/idc/idcenter-%d{MM-dd-yyyy}.log">
+            <PatternLayout pattern="[%p] %d %c - %m%n" />
+            <Policies>
+                <SizeBasedTriggeringPolicy size="1 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+        
+         
+        <RollingRandomAccessFile name="RandomAccessFile" fileName="sys.log" filePattern="sys-%d{MM-dd-yyyy}.log" immediateFlush="false" append="false" bufferSize="10240">
+			<PatternLayout pattern="[%p] %d %c - %m%n" />
+			<Policies>
+                <SizeBasedTriggeringPolicy size="1 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="50"/>
+		</RollingRandomAccessFile>
+		
+		 -->
+    </Appenders>
+    <Loggers>
+        <!--
+        <Logger name="mh.sample2.Log4jTest2" level="INFO" additivity="false">
+            <AppenderRef ref="RollingFile" />
+        </Logger>
+        -->
+        <Root level="INFO" includeLocation="false">
+        	<!--
+            <AppenderRef ref="RollingFile" />
+            <AppenderRef ref="RandomAccessFile" />
+            -->
+            <AppenderRef ref="Console" />
+        </Root>
+    </Loggers>
+</Configuration>
